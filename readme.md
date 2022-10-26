@@ -26,3 +26,7 @@ touch readme.md .gitignore setup.py dvc.yaml param.yaml
 mkdir -p config src/utils/__init__.py src/__init__.py
 touch config/config.yaml config/secrets.yaml
 ```
+### install src
+```bash
+pip install -e .
+```
