@@ -6,3 +6,6 @@ pandas
 tqdm
 PyYAML
 boto3 ## used for s3 
+
+# local package
+-e .
