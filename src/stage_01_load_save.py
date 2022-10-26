@@ -1,25 +1,26 @@
 from src.utils.all_utils import read_yaml, create_directory
 import argparse, os
 import pandas as pd 
+import shutil
+from tqdm import tqdm
+
+def copy_file(source, local):
+    list_of_files = os.listdir(source)
+    N = len(list_of_files)
+    for file in tqdm(list_of_files, total=N, desc=f'copying file from {source} to {local}', colour='green'):
+        src = os.path.join(source, file)
+        dest = os.path.join(local, file)
+        shutil.copy(src, dest)
 
 def get_data(config_path):
     config = read_yaml(config_path)
 
-    remote_data_path = config["data_source"]
-    df = pd.read_csv(remote_data_path, sep=';')
+    source_download_dirs = config['source_download_dirs']
+    local_data_dirs = config['local_data_dirs']
 
-    # save the data in local directory
-    # create path to directory: artifacts/raw_local_dir/data.csv
-    artifacts_dir = config['artifacts']['artifacts_dir']
-    raw_local_dir = config['artifacts']['raw_local_dir']
-    raw_local_file = config['artifacts']['raw_local_file']
-
-    raw_local_dir_path = os.path.join(artifacts_dir, raw_local_dir)
-    create_directory(dirs=[raw_local_dir_path])
-
-    raw_local_file_path = os.path.join(raw_local_dir_path, raw_local_file)
-    df.to_csv(raw_local_file_path, sep=',', index=False)
-
+    for source_download_dir, local_data_dir in tqdm(zip(source_download_dirs, local_data_dirs), total=2, desc= 'list of folders', colour='red'):
+        create_directory([local_data_dir])
+        copy_file(source_download_dir, local_data_dir)
 
 if __name__=="__main__":
     args = argparse.ArgumentParser()

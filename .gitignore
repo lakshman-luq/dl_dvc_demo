@@ -134,3 +134,6 @@ dmypy.json
 
 # ignore the secrets file
 config/secrets.yaml
+
+# data images of cat and dog
+data/
