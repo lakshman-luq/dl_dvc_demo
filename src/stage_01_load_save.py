@@ -3,6 +3,12 @@ import argparse, os
 import pandas as pd 
 import shutil
 from tqdm import tqdm
+import logging
+
+logging_str = '[%(asctime)s: %(levelname)s: %(modeule)s]: %(message)s'
+log_dir = 'logs'
+create_directory([log_dir])
+logging.basicConfig(filename=os.path.join(log_dir, 'running_logs.log'), level=logging.INFO, format=logging_str, filemode='a')
 
 def copy_file(source, local):
     list_of_files = os.listdir(source)
@@ -28,4 +34,10 @@ if __name__=="__main__":
     args.add_argument("--config", "-c", default="config/config.yaml")
     parsed_args = args.parse_args()
 
-    get_data(config_path=parsed_args.config)
+    try:
+        logging.info('stage one started')
+        get_data(config_path=parsed_args.config)
+        logging.info('stage one completed! all the data are saved in local')
+    except Exception as e:
+        logging.exception(e)
+        raise e
