@@ -4,6 +4,7 @@ import argparse
 import os
 import logging
 
+
 logging_str = '[%(asctime)s: %(levelname)s: %(module)s]: %(message)s'
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
@@ -43,9 +44,9 @@ if __name__ == '__main__':
     parsed_args = args.parse_args()
 
     try:
-        logging.info(">>>>> stage three started")
+        logging.info('>>>>>> stage three started!!')
         prepare_callbacks(config_path=parsed_args.config, params_path=parsed_args.params)
-        logging.info("stage three completed! callbacks are prepared and saved as binary>>>>>\n")
+        logging.info('stage three completed!! callbacks created <<<<<<<\n')
     except Exception as e:
         logging.exception(e)
         raise e

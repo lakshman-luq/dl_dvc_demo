@@ -137,3 +137,11 @@ config/secrets.yaml
 
 # data images of cat and dog
 data/
+
+# model
+artifacts/base_model
+artifacts/callbacks
+artifacts/checkpoints
+artifacts/model
+artifacts/tensorboard_log_dir
+/data

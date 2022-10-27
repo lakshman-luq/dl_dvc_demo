@@ -55,7 +55,6 @@ def prepare_base_model(config_path, params_path):
 
     full_model.save(update_base_model_path)
 
-
 if __name__=="__main__":
     args = argparse.ArgumentParser()
 
